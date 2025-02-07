@@ -1,15 +1,23 @@
 # bun-executable-repro
 
-To install dependencies:
+This is a reproduction of a bug I'm seeing with single file executables.
+
+To reproduce:
 
 ```bash
 bun install
+
+bun build --compile --minify --sourcemap ./index.ts --outfile program
 ```
 
-To run:
+Then run the program:
 
 ```bash
-bun run index.ts
+./program
 ```
 
-This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+You should see the following error:
+
+```
+error: Cannot find module './solclientjs.js' from '/$bunfs/root/program'
+```
